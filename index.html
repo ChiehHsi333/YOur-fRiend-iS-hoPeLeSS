@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>不同行为画像 · 15 题版</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <main class="app">
+    <section id="intro" class="screen active">
+      <div class="hero">
+        <p class="kicker">15 题 · 6 维度画像</p>
+        <h1>你这朋友算是废了</h1>
+        <p class="lead">每题 4 个选项，选完出一张画像。你也可以回头修改，但结果不会替你心软。</p>
+        <div class="intro-meta">
+          <span>共 15 题</span>
+          <span>15 核心标签 + 特殊标签</span>
+          <span>6 维度评语</span>
+        </div>
+        <div class="hero-actions">
+          <button id="startBtn" class="btn btn-primary">开始测试</button>
+          <button id="openCardsIntroBtn" class="btn btn-ghost">卡牌墙</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="screen">
+      <div class="topbar">
+        <span class="kicker">逐题切换</span>
+        <div class="progress">
+          <div class="progress-count">
+            <span id="progressCurrent">1</span>
+            <span class="sep">/</span>
+            <span id="progressTotal">15</span>
+          </div>
+          <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="15" aria-valuenow="0">
+            <span id="progressFill" class="progress-fill"></span>
+          </div>
+          <div class="progress-remaining">剩余 <span id="progressRemaining">14</span> 题</div>
+        </div>
+      </div>
+
+      <div class="question-card">
+        <div class="question-title" id="questionTitle">第 1 题 · 幼儿园</div>
+        <h2 id="questionPrompt">问题内容</h2>
+        <div id="optionsList" class="options"></div>
+      </div>
+
+      <div class="nav">
+        <button id="prevBtn" class="btn btn-ghost">上一题</button>
+        <button id="nextBtn" class="btn btn-primary" disabled>下一题</button>
+      </div>
+    </section>
+
+    <section id="result" class="screen">
+      <div class="result-hero">
+        <p class="kicker">最终画像</p>
+        <h2 id="resultLabel">结果标题</h2>
+        <p id="resultDescription" class="result-desc">结果描述</p>
+        <p id="resultCardEcho" class="result-card is-hidden"></p>
+      </div>
+
+      <div class="result-grid">
+        <div class="comment-box">
+          <h3>综合评语</h3>
+          <div class="radar-wrap">
+            <canvas id="radarChart" width="240" height="240"></canvas>
+          </div>
+          <p id="resultComment"></p>
+        </div>
+
+        <div class="score-box">
+          <h3>属性总计</h3>
+          <div id="scoreList" class="score-list"></div>
+        </div>
+      </div>
+
+      <div class="share-box">
+        <label for="shareText">分享文案</label>
+        <textarea id="shareText" rows="3" readonly></textarea>
+        <div class="share-actions">
+          <button id="copyBtn" class="btn btn-ghost">复制文案</button>
+          <button id="downloadBtn" class="btn btn-primary">保存图片</button>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button id="restartBtn" class="btn btn-primary">重新开始</button>
+        <button id="openCardsResultBtn" class="btn btn-ghost">查看卡牌墙</button>
+      </div>
+    </section>
+
+    <section id="cards" class="screen">
+      <div class="result-hero">
+        <p class="kicker">卡牌墙</p>
+        <h2>
+          已收集 <span id="cardCount">0</span> / <span id="cardTotal">60</span>
+        </h2>
+        <p class="result-desc">每次选择都会解锁对应卡牌。</p>
+      </div>
+
+      <div class="card-select">
+        <p class="result-desc">从已获得卡牌中选择 3 张，结果页将随机引用其中一张。</p>
+        <div class="card-select-meta">
+          <span>已选 <span id="selectedCount">0</span> / 3</span>
+          <button id="clearSelectionBtn" class="btn btn-ghost btn-small" type="button">清空选择</button>
+        </div>
+        <div id="selectedList" class="selected-list"></div>
+      </div>
+
+      <div id="cardGrid" class="card-grid"></div>
+
+      <div class="nav">
+        <button id="cardsBackIntro" class="btn btn-ghost">返回开始</button>
+        <button id="cardsBackResult" class="btn btn-primary">返回结果</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>

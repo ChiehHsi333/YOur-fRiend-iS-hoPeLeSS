@@ -1,0 +1,38 @@
+[
+	{
+		"id": "comment-lan",
+		"label": "摆烂力最高",
+		"rule": { "topIs": "lan" },
+		"text": "摆烂力：放弃的速度与优雅程度（防御/闪避）。"
+	},
+	{
+		"id": "comment-zic",
+		"label": "自嘲力最高",
+		"rule": { "topIs": "zic" },
+		"text": "自嘲力：把悲剧讲成喜剧的能力（精神攻击）。"
+	},
+	{
+		"id": "comment-hua",
+		"label": "画饼力最高",
+		"rule": { "topIs": "hua" },
+		"text": "画饼力：给自己立flag并相信的能力（魅惑/自我催眠）。"
+	},
+	{
+		"id": "comment-xia",
+		"label": "消费力最高",
+		"rule": { "topIs": "xia" },
+		"text": "消费力：用花钱代替行动的执行力（资源置换）。"
+	},
+	{
+		"id": "comment-bia",
+		"label": "表演力最高",
+		"rule": { "topIs": "bia" },
+		"text": "表演力：线上线下人格切换的熟练度（伪装/潜伏）。"
+	},
+	{
+		"id": "comment-dun",
+		"label": "钝感力最高",
+		"rule": { "topIs": "dun" },
+		"text": "钝感力：对失败麻木并继续的能力（韧性/回血）。"
+	}
+]

@@ -1,0 +1,354 @@
+[
+  {
+    "id": "extreme-lan",
+    "tier": "extreme",
+    "label": "摆烂终身荣誉顾问",
+    "description": "放弃已成为肌肉记忆，建议申遗",
+    "main": "lan",
+    "conditions": {
+      "min": {
+        "lan": 50
+      }
+    }
+  },
+  {
+    "id": "extreme-zic",
+    "tier": "extreme",
+    "label": "自嘲黑洞",
+    "description": "能把葬礼讲成脱口秀，但自己笑不出来",
+    "main": "zic",
+    "conditions": {
+      "min": {
+        "zic": 50
+      }
+    }
+  },
+  {
+    "id": "extreme-hua",
+    "tier": "extreme",
+    "label": "饼学博士生导师",
+    "description": "画的饼能充饥、御寒、当房产证用",
+    "main": "hua",
+    "conditions": {
+      "min": {
+        "hua": 50
+      }
+    }
+  },
+  {
+    "id": "extreme-xia",
+    "tier": "extreme",
+    "label": "消费主义祭司",
+    "description": "花钱是信仰，物品是祭品，空虚是神谕",
+    "main": "xia",
+    "conditions": {
+      "min": {
+        "xia": 50
+      }
+    }
+  },
+  {
+    "id": "extreme-bia",
+    "tier": "extreme",
+    "label": "影武者·完全体",
+    "description": "七个人格轮班，周日休息，自己数不清",
+    "main": "bia",
+    "conditions": {
+      "min": {
+        "bia": 50
+      }
+    }
+  },
+  {
+    "id": "extreme-dun",
+    "tier": "extreme",
+    "label": "重装骑士·无敌版",
+    "description": "血厚防高，对痛苦免疫，但可能也免疫快乐",
+    "main": "dun",
+    "conditions": {
+      "min": {
+        "dun": 50
+      }
+    }
+  },
+  {
+    "id": "combo-01",
+    "tier": "combo",
+    "label": "创伤驱动的赛博行为艺术",
+    "description": "用放弃表演治愈童年，线上比线下更真实",
+    "combo": ["lan", "zic", "bia"],
+    "conditions": {
+      "min": {
+        "lan": 20,
+        "zic": 20,
+        "bia": 20
+      }
+    }
+  },
+  {
+    "id": "combo-02",
+    "tier": "combo",
+    "label": "仪式性消费型画饼",
+    "description": "买装备=做了，拍照片=练了，收藏=学了",
+    "combo": ["lan", "xia", "hua"],
+    "conditions": {
+      "min": {
+        "lan": 20,
+        "xia": 20,
+        "hua": 20
+      }
+    }
+  },
+  {
+    "id": "combo-03",
+    "tier": "combo",
+    "label": "麻木型人格分裂喜剧人",
+    "description": "线上线下判若两人，但两边都在自嘲",
+    "combo": ["zic", "bia", "dun"],
+    "conditions": {
+      "min": {
+        "zic": 20,
+        "bia": 20,
+        "dun": 20
+      }
+    }
+  },
+  {
+    "id": "combo-04",
+    "tier": "combo",
+    "label": "精致废墟策展人·Pro",
+    "description": "废墟里开ins风展览，且收费入场",
+    "combo": ["hua", "xia", "bia"],
+    "conditions": {
+      "min": {
+        "hua": 20,
+        "xia": 20,
+        "bia": 20
+      }
+    }
+  },
+  {
+    "id": "combo-05",
+    "tier": "combo",
+    "label": "放弃得太熟练的喜剧演员",
+    "description": "还没摔倒已经在想怎么吐槽自己",
+    "combo": ["lan", "dun", "zic"],
+    "conditions": {
+      "min": {
+        "lan": 20,
+        "dun": 20,
+        "zic": 20
+      }
+    }
+  },
+  {
+    "id": "core-01",
+    "tier": "core",
+    "label": "创伤驱动的行为艺术",
+    "description": "用放弃表演治愈童年，观众只有自己。",
+    "main": "lan",
+    "sub": "zic",
+    "conditions": {
+      "min": {
+        "lan": 25,
+        "zic": 15
+      }
+    }
+  },
+  {
+    "id": "core-02",
+    "tier": "core",
+    "label": "仪式性消费型摆烂",
+    "description": "买装备=做了，拍照片=练了，发朋友圈=成了。",
+    "main": "lan",
+    "sub": "xia",
+    "conditions": {
+      "min": {
+        "lan": 25,
+        "xia": 15
+      }
+    }
+  },
+  {
+    "id": "core-03",
+    "tier": "core",
+    "label": "线上线下双轨摆烂",
+    "description": "线下假装努力，线上真实摆烂，互不干扰。",
+    "main": "lan",
+    "sub": "bia",
+    "conditions": {
+      "min": {
+        "lan": 25,
+        "bia": 15
+      }
+    }
+  },
+  {
+    "id": "core-04",
+    "tier": "core",
+    "label": "代际传递的拖延",
+    "description": "父母的“以后再说”变成了自己的“下次一定”。",
+    "main": "lan",
+    "sub": "dun",
+    "conditions": {
+      "min": {
+        "lan": 25,
+        "dun": 15
+      }
+    }
+  },
+  {
+    "id": "core-05",
+    "tier": "core",
+    "label": "自我消解型幽默",
+    "description": "还没开始就已经想好怎么吐槽自己了。",
+    "main": "zic",
+    "sub": "lan",
+    "conditions": {
+      "min": {
+        "zic": 25,
+        "lan": 15
+      }
+    }
+  },
+  {
+    "id": "core-06",
+    "tier": "core",
+    "label": "痛苦项目管理师",
+    "description": "把崩溃做成思维导图，但“下次还敢”。",
+    "main": "zic",
+    "sub": "hua",
+    "conditions": {
+      "min": {
+        "zic": 25,
+        "hua": 15
+      }
+    }
+  },
+  {
+    "id": "core-07",
+    "tier": "core",
+    "label": "赛博哭墙建造者",
+    "description": "匿名小号里“今天又失败了”，但配图精致。",
+    "main": "zic",
+    "sub": "bia",
+    "conditions": {
+      "min": {
+        "zic": 25,
+        "bia": 15
+      }
+    }
+  },
+  {
+    "id": "core-08",
+    "tier": "core",
+    "label": "预言型悲观喜剧人",
+    "description": "专预言坏事，且预言准确率100%。",
+    "main": "zic",
+    "sub": "dun",
+    "conditions": {
+      "min": {
+        "zic": 25,
+        "dun": 15
+      }
+    }
+  },
+  {
+    "id": "core-09",
+    "tier": "core",
+    "label": "望梅止渴型画饼师",
+    "description": "收藏教程=学了，买装备=练了，立flag=做了。",
+    "main": "hua",
+    "sub": "lan",
+    "conditions": {
+      "min": {
+        "hua": 25,
+        "lan": 15
+      }
+    }
+  },
+  {
+    "id": "core-10",
+    "tier": "core",
+    "label": "消费主义赎罪券",
+    "description": "知识付费是新时代的赎罪券，买了=学了。",
+    "main": "xia",
+    "sub": "hua",
+    "conditions": {
+      "min": {
+        "xia": 25,
+        "hua": 15
+      }
+    }
+  },
+  {
+    "id": "core-11",
+    "tier": "core",
+    "label": "精致废墟策展人",
+    "description": "摆烂也要摆出陈列感，废墟里开ins风展览。",
+    "main": "xia",
+    "sub": "bia",
+    "conditions": {
+      "min": {
+        "xia": 25,
+        "bia": 15
+      }
+    }
+  },
+  {
+    "id": "core-12",
+    "tier": "core",
+    "label": "对冲型养生朋克",
+    "description": "枸杞配炸鸡，体检正常觉得亏，关掉步数=健康。",
+    "main": "xia",
+    "sub": "dun",
+    "conditions": {
+      "min": {
+        "xia": 25,
+        "dun": 15
+      }
+    }
+  },
+  {
+    "id": "core-13",
+    "tier": "core",
+    "label": "人格分裂表演家",
+    "description": "小号比大号更像本人，线上线下判若两人。",
+    "main": "bia",
+    "sub": "zic",
+    "conditions": {
+      "min": {
+        "bia": 25,
+        "zic": 15
+      }
+    }
+  },
+  {
+    "id": "core-14",
+    "tier": "core",
+    "label": "社交电量伪装者",
+    "description": "社交电量不足但还在硬撑，笑脸是机械表情。",
+    "main": "bia",
+    "sub": "dun",
+    "conditions": {
+      "min": {
+        "bia": 25,
+        "dun": 15
+      }
+    }
+  },
+  {
+    "id": "core-15",
+    "tier": "core",
+    "label": "麻木型循环玩家",
+    "description": "放弃得过于熟练，对失败麻木并继续。",
+    "main": "dun",
+    "sub": "lan",
+    "conditions": {
+      "min": {
+        "dun": 25,
+        "lan": 15
+      }
+    }
+  }
+]

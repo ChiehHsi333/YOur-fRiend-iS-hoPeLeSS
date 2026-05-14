@@ -53,6 +53,7 @@ const ui = {
   questionCard: document.querySelector(".question-card"),
   questionTitle: document.getElementById("questionTitle"),
   questionPrompt: document.getElementById("questionPrompt"),
+  questionImage: document.getElementById("questionImage"),
   optionsList: document.getElementById("optionsList"),
   resultLabel: document.getElementById("resultLabel"),
   resultDescription: document.getElementById("resultDescription"),
@@ -248,6 +249,10 @@ function renderQuestion() {
   ui.progressCurrent.textContent = String(state.currentIndex + 1);
   ui.questionTitle.textContent = `第 ${question.id} 题 · ${question.title}`;
   ui.questionPrompt.textContent = question.prompt;
+  if (ui.questionImage) {
+    ui.questionImage.src = `./images/questions/q${question.id}.png`;
+    ui.questionImage.style.display = "";
+  }
 
   const selected = state.answerMap[question.id]?.optionId;
   ui.optionsList.innerHTML = "";
@@ -257,8 +262,10 @@ function renderQuestion() {
     button.type = "button";
     button.className = "option" + (selected === option.id ? " selected" : "");
     button.dataset.option = option.id;
+    const imgSrc = `./images/cards/t${question.id}${option.id.toLowerCase()}.png`;
     button.innerHTML = `
       <span class="option-label">${option.id}</span>
+      <img class="option-image" src="${imgSrc}" alt="" loading="lazy" onerror="this.style.display='none'">
       <span class="option-content">
         <h4>${option.text}</h4>
         <p>${option.note}</p>
@@ -741,14 +748,14 @@ function renderCardWall() {
 
   ui.cardGrid.innerHTML = "";
 
-  const drawnIds = new Set(state.drawnCards.map((c) => c.id));
+  const collectedIds = new Set(state.collectedCards || []);
 
   state.cards.forEach((card) => {
     const item = document.createElement("div");
-    const isDrawn = drawnIds.has(card.id);
-    item.className = `card-item${isDrawn ? "" : " locked"}`;
+    const isCollected = collectedIds.has(card.id);
+    item.className = `card-item${isCollected ? "" : " locked"}`;
 
-    if (isDrawn) {
+    if (isCollected) {
       item.innerHTML = `
         <img src="${card.image}" alt="${card.title}" class="card-image">
         <div class="card-title">${card.title}</div>
@@ -762,7 +769,7 @@ function renderCardWall() {
   });
 
   if (ui.cardCount) {
-    ui.cardCount.textContent = String(state.drawnCards.length);
+    ui.cardCount.textContent = String(collectedIds.size);
   }
   if (ui.cardTotal) {
     ui.cardTotal.textContent = String(state.cards.length);

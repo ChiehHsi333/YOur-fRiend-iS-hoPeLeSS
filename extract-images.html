@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Extract PDF Images</title>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.8.69/build/pdf.min.mjs" type="module"></script>
+</head>
+<body>
+  <h2>PDF Image Extractor</h2>
+  <input type="file" id="pdfFile" accept=".pdf">
+  <div id="status"></div>
+  <div id="images"></div>
+
+  <script type="module">
+    import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.8.69/build/pdf.min.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.8.69/build/pdf.worker.min.mjs';
+
+    document.getElementById('pdfFile').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const status = document.getElementById('status');
+      const imagesDiv = document.getElementById('images');
+      status.textContent = 'Loading PDF...';
+      imagesDiv.innerHTML = '';
+
+      const arrayBuffer = await file.arrayBuffer();
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+
+      let imageCount = 0;
+      const zipImages = [];
+
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        const page = await pdf.getPage(pageNum);
+        const ops = await page.getOperatorList();
+
+        for (let i = 0; i < ops.fnArray.length; i++) {
+          if (ops.fnArray[i] === pdfjsLib.OPS.paintImageXObject) {
+            const imgName = ops.argsArray[i][0];
+            try {
+              const img = await page.objs.get(imgName);
+              if (img && img.data) {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+
+                let imgData;
+                if (img.kind === 'RGB') {
+                  imgData = ctx.createImageData(img.width, img.height);
+                  const data = img.data;
+                  for (let j = 0, k = 0; j < data.length; j += 3, k += 4) {
+                    imgData.data[k] = data[j];
+                    imgData.data[k + 1] = data[j + 1];
+                    imgData.data[k + 2] = data[j + 2];
+                    imgData.data[k + 3] = 255;
+                  }
+                } else if (img.kind === 'RGBA') {
+                  imgData = new ImageData(new Uint8ClampedArray(img.data), img.width, img.height);
+                } else {
+                  continue;
+                }
+
+                ctx.putImageData(imgData, 0, 0);
+
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                const url = URL.createObjectURL(blob);
+
+                const div = document.createElement('div');
+                div.style.margin = '10px';
+                div.innerHTML = `<p>Page ${pageNum} - Image ${imageCount}</p><img src="${url}" style="max-width:300px;border:1px solid #ccc;"><br><a href="${url}" download="page${pageNum}_img${imageCount}.png">Download</a>`;
+                imagesDiv.appendChild(div);
+
+                imageCount++;
+              }
+            } catch (err) {
+              console.error('Error extracting image:', err);
+            }
+          }
+        }
+      }
+
+      status.textContent = `Extracted ${imageCount} images. Click download links below to save each image.`;
+    });
+  </script>
+</body>
+</html>

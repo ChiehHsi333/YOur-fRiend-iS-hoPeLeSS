@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pdfjs-dist": "^4.8.69",
+    "sharp": "^0.34.5"
+  }
+}

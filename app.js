@@ -263,14 +263,28 @@ function renderQuestion() {
     button.className = "option" + (selected === option.id ? " selected" : "");
     button.dataset.option = option.id;
     const imgSrc = `./images/cards/t${question.id}${option.id.toLowerCase()}.png`;
+    const cardTitle = option.note || option.text;
     button.innerHTML = `
       <span class="option-label">${option.id}</span>
-      <img class="option-image" src="${imgSrc}" alt="" loading="lazy" onerror="this.style.display='none'">
+      <img class="option-image" src="${imgSrc}" alt="${cardTitle}" loading="lazy" onerror="this.style.display='none'">
       <span class="option-content">
         <h4>${option.text}</h4>
         <p>${option.note}</p>
       </span>
     `;
+
+    // 点击图片查看大图
+    const imgEl = button.querySelector(".option-image");
+    if (imgEl) {
+      imgEl.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openCardModal({
+          image: imgSrc,
+          title: cardTitle
+        });
+      });
+    }
+
     button.addEventListener("click", () => selectOption(question, option));
     ui.optionsList.appendChild(button);
   });
@@ -694,11 +708,15 @@ function initDrawCardsSection() {
   const drawnIds = shuffled.slice(0, 3);
   state.drawnCards = drawnIds.map((id) => getCardById(id)).filter(Boolean);
 
-  // 重置UI
+  // 重置UI - 使用3D翻转结构
   const slots = ui.drawCardsGrid?.querySelectorAll(".draw-card-slot");
   slots?.forEach((slot, index) => {
     slot.classList.remove("revealed");
-    slot.innerHTML = '<span class="draw-card-question">?</span>';
+    const card = state.drawnCards[index];
+    slot.innerHTML = `
+      <span class="draw-card-question">?</span>
+      <img src="${card?.image || ''}" alt="${card?.title || ''}">
+    `;
   });
 
   // 绑定点击事件
@@ -719,7 +737,6 @@ function revealCardSlot(index) {
     const slot = slots?.[index];
     if (slot) {
       slot.classList.add("revealed");
-      slot.innerHTML = `<img src="${card.image}" alt="${card.title}">`;
     }
 
     // 检查是否全部翻开
@@ -881,7 +898,7 @@ function renderRadarChartTo(scores, canvas) {
   const labelDistance = radius + labelOffset;
   const levels = 4;
 
-  ctx.strokeStyle = "rgba(0, 0, 0, 0.18)";
+  ctx.strokeStyle = "rgba(0, 0, 0, 0.12)";
   ctx.lineWidth = 1;
 
   for (let i = 1; i <= levels; i += 1) {
@@ -905,8 +922,8 @@ function renderRadarChartTo(scores, canvas) {
     const angle = (Math.PI * 2 * index) / ATTRS.length - Math.PI / 2;
     const x = center + Math.cos(angle) * labelDistance;
     const y = center + Math.sin(angle) * labelDistance;
-    ctx.fillStyle = "#111111";
-    ctx.font = "12px 'Noto Sans SC'";
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "13px 'Noto Sans SC'";
     ctx.textAlign = Math.cos(angle) > 0.1 ? "left" : Math.cos(angle) < -0.1 ? "right" : "center";
     ctx.textBaseline = Math.sin(angle) > 0.1 ? "top" : Math.sin(angle) < -0.1 ? "bottom" : "middle";
     ctx.fillText(attr.label, x, y);
@@ -927,9 +944,9 @@ function renderRadarChartTo(scores, canvas) {
     }
   });
   ctx.closePath();
-  ctx.fillStyle = "rgba(0, 0, 0, 0.12)";
+  ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
   ctx.fill();
-  ctx.strokeStyle = "#111111";
+  ctx.strokeStyle = "#1a1a1a";
   ctx.lineWidth = 2;
   ctx.stroke();
 }
@@ -966,15 +983,16 @@ async function downloadResultCard() {
   canvas.height = height;
 
   const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#f6f2ea";
+  ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = "#111111";
-  ctx.font = "40px 'ZCOOL XiaoWei'";
-  ctx.fillText("最终画像", 80, 120);
+  ctx.fillStyle = "#1a1a1a";
+  ctx.font = "600 36px 'Noto Sans SC'";
+  ctx.fillText("最终画像", 80, 100);
 
-  ctx.font = "64px 'ZCOOL XiaoWei'";
-  wrapText(ctx, outcome.label, 80, 210, width - 160, 72);
+  ctx.fillStyle = "#1a1a1a";
+  ctx.font = "700 64px 'Noto Serif SC'";
+  wrapText(ctx, outcome.label, 80, 200, width - 160, 72);
 
   ctx.font = "32px 'Noto Sans SC'";
   wrapText(ctx, outcome.description, 80, 360, width - 160, 46);
@@ -982,17 +1000,19 @@ async function downloadResultCard() {
   ctx.font = "28px 'Noto Sans SC'";
   wrapText(ctx, comment.text, 80, 500, width - 160, 40);
 
-  ctx.font = "26px 'Noto Sans SC'";
-  ctx.fillText("属性总计", 80, 740);
+  ctx.font = "600 26px 'Noto Sans SC'";
+  ctx.fillStyle = "#1a1a1a";
+  ctx.fillText("属性总计", 80, 720);
 
   ctx.font = "24px 'Noto Sans SC'";
+  ctx.fillStyle = "#1a1a1a";
   ATTRS.forEach((attr, index) => {
-    ctx.fillText(`${attr.label} ${state.scores[attr.id]}`, 80, 790 + index * 42);
+    ctx.fillText(`${attr.label} ${state.scores[attr.id]}`, 80, 770 + index * 42);
   });
 
   ctx.font = "20px 'Noto Sans SC'";
-  ctx.fillStyle = "#5f5f5f";
-  ctx.fillText("15 题版本", 80, height - 80);
+  ctx.fillStyle = "#666666";
+  ctx.fillText("15 题版本", 80, height - 60);
 
   const link = document.createElement("a");
   link.download = "result-card.png";
@@ -1021,9 +1041,9 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
 
 function showToast(message, isError = false) {
   ui.toast.textContent = message;
-  ui.toast.style.background = isError ? "#111111" : "#00b894";
+  ui.toast.style.background = isError ? "#2d3436" : "";
   ui.toast.classList.add("show");
-  setTimeout(() => ui.toast.classList.remove("show"), 2000);
+  setTimeout(() => ui.toast.classList.remove("show"), 2500);
 }
 
 function updateProgress() {

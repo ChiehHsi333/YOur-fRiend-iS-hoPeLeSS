@@ -92,12 +92,6 @@ const ui = {
 init();
 
 async function init() {
-  // 临时清空：答题历史与当前进度
-  if (typeof localStorage !== "undefined") {
-    localStorage.removeItem(ATTEMPT_HISTORY_KEY);
-    localStorage.removeItem(CURRENT_ANSWER_KEY);
-  }
-
   const [questions, outcomes, comments] = await Promise.all([
     loadJson("./data/questions.json"),
     loadJson("./data/outcomes.json"),
@@ -350,7 +344,6 @@ function openProfile() {
 
   ui.profileLabel.textContent = outcome.label;
   ui.profileDescription.textContent = outcome.description;
-  ui.profileComment.textContent = comment.text;
 
   if (ui.profileProgressHint) {
     if (hasHistory) {
@@ -373,6 +366,9 @@ function openProfile() {
 
   // Initialize the draw-cards area for the profile page
   initDrawCardsSection();
+
+  // Profile comprehensive comment is locked until the player finishes the draw
+  renderProfileCommentStage();
 }
 
 // Build `state.collectedCards` from `state.attemptHistory` and current answers
@@ -397,6 +393,72 @@ function rebuildCollectedFromHistory() {
 
   // include current in-progress answers as well
   includeAnswerMap(state.answerMap);
+}
+
+function renderProfileCommentStage() {
+  if (!ui.profileComment) {
+    return;
+  }
+
+  if (!state.hasDrawn || state.drawnCards.length < 3) {
+    ui.profileComment.innerHTML = `
+      <p class="profile-comment-lock">抽满 3 张卡后解锁完整综合评语。</p>
+      <p class="profile-comment-hint">当前仅展示属性统计与画像主体，综合评语会根据你抽到的卡牌逐级展开。</p>
+    `;
+    return;
+  }
+
+  const stages = buildProfileCommentStages();
+  ui.profileComment.innerHTML = stages.map((stage) => `
+    <div class="profile-comment-stage">
+      <p class="profile-comment-stage-label">${stage.label}</p>
+      <p class="profile-comment-stage-text">${stage.text}</p>
+      <p class="profile-comment-stage-card">对应卡牌：${stage.cardTitle}</p>
+    </div>
+  `).join("");
+}
+
+function buildProfileCommentStages() {
+  const sortedCards = [...state.drawnCards]
+    .map((card) => ({
+      ...card,
+      score: getCardIntensityScore(card)
+    }))
+    .sort((a, b) => a.score - b.score);
+
+  return sortedCards.map((card, index) => {
+    const label = ["轻度综合评语", "中度综合评语", "重度综合评语"][index] || `第 ${index + 1} 段综合评语`;
+    return {
+      label,
+      cardTitle: card.title,
+      text: composeProfileCommentByCard(card, index)
+    };
+  });
+}
+
+function composeProfileCommentByCard(card, stageIndex) {
+  const dominant = getDominantAttrFromWeights(card.weights || {});
+  const attrLabel = ATTRS.find((attr) => attr.id === dominant)?.label || "未知属性";
+  const stageTextMap = [
+    "偏向刚刚露头，说明这个倾向还在可控范围，像是在试探边界。",
+    "倾向已经开始成形，日常行为会明显围绕这个方向展开。",
+    "这个倾向已经占据主导，几乎会直接决定你的反应模式和行动习惯。"
+  ];
+  const intensityText = stageTextMap[stageIndex] || stageTextMap[2];
+  return `这张卡牌的主轴更接近“${attrLabel}”，${intensityText}`;
+}
+
+function getDominantAttrFromWeights(weights) {
+  return Object.entries(weights).reduce((best, current) => {
+    if (!best) {
+      return current;
+    }
+    return current[1] > best[1] ? current : best;
+  }, null)?.[0] || ATTRS[0].id;
+}
+
+function getCardIntensityScore(card) {
+  return Object.values(card.weights || {}).reduce((sum, value) => sum + value, 0);
 }
 
 function showResult() {
@@ -566,6 +628,7 @@ function buildCardsFromQuestions(questions) {
         questionId: question.id,
         optionId: option.id,
         title: option.note || option.text,
+        weights: { ...option.weights },
         image: `./images/cards/t${question.id}${option.id.toLowerCase()}.png`
       });
     });
@@ -625,6 +688,7 @@ function revealCardSlot(index) {
     if (state.revealedSlots.every((r) => r)) {
       state.hasDrawn = true;
       updateCardEcho();
+      renderProfileCommentStage();
     }
   }
 
@@ -634,6 +698,7 @@ function revealCardSlot(index) {
 
 function redrawCards() {
   initDrawCardsSection();
+  renderProfileCommentStage();
 }
 
 function getCardById(cardId) {

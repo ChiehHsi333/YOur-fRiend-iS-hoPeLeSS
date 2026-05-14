@@ -33,7 +33,9 @@ const state = {
   autoAdvance: null,
   previousScreen: "intro",
   attemptHistory: [],
-  hasDrawn: false
+  hasDrawn: false,
+  profileOutcome: null,
+  profileScores: null
 };
 
 const ui = {
@@ -342,6 +344,9 @@ function openProfile() {
   const outcome = selectOutcome(scores);
   const comment = selectComment(scores);
 
+  state.profileScores = scores;
+  state.profileOutcome = outcome;
+
   ui.profileLabel.textContent = outcome.label;
   ui.profileDescription.textContent = outcome.description;
 
@@ -408,57 +413,83 @@ function renderProfileCommentStage() {
     return;
   }
 
-  const stages = buildProfileCommentStages();
-  ui.profileComment.innerHTML = stages.map((stage) => `
+  const outcome = state.profileOutcome || state.result || state.outcomes[0];
+  const tierInfo = getDrawnCardsTier();
+  const review = getProfileReviewForTier(outcome, tierInfo.tier);
+
+  ui.profileComment.innerHTML = `
     <div class="profile-comment-stage">
-      <p class="profile-comment-stage-label">${stage.label}</p>
-      <p class="profile-comment-stage-text">${stage.text}</p>
-      <p class="profile-comment-stage-card">对应卡牌：${stage.cardTitle}</p>
+      <p class="profile-comment-stage-label">${tierInfo.label}</p>
+      <p class="profile-comment-stage-text">${review}</p>
     </div>
-  `).join("");
-}
-
-function buildProfileCommentStages() {
-  const sortedCards = [...state.drawnCards]
-    .map((card) => ({
-      ...card,
-      score: getCardIntensityScore(card)
-    }))
-    .sort((a, b) => a.score - b.score);
-
-  return sortedCards.map((card, index) => {
-    const label = ["轻度综合评语", "中度综合评语", "重度综合评语"][index] || `第 ${index + 1} 段综合评语`;
-    return {
-      label,
-      cardTitle: card.title,
-      text: composeProfileCommentByCard(card, index)
-    };
-  });
-}
-
-function composeProfileCommentByCard(card, stageIndex) {
-  const dominant = getDominantAttrFromWeights(card.weights || {});
-  const attrLabel = ATTRS.find((attr) => attr.id === dominant)?.label || "未知属性";
-  const stageTextMap = [
-    "偏向刚刚露头，说明这个倾向还在可控范围，像是在试探边界。",
-    "倾向已经开始成形，日常行为会明显围绕这个方向展开。",
-    "这个倾向已经占据主导，几乎会直接决定你的反应模式和行动习惯。"
-  ];
-  const intensityText = stageTextMap[stageIndex] || stageTextMap[2];
-  return `这张卡牌的主轴更接近“${attrLabel}”，${intensityText}`;
-}
-
-function getDominantAttrFromWeights(weights) {
-  return Object.entries(weights).reduce((best, current) => {
-    if (!best) {
-      return current;
-    }
-    return current[1] > best[1] ? current : best;
-  }, null)?.[0] || ATTRS[0].id;
+  `;
 }
 
 function getCardIntensityScore(card) {
   return Object.values(card.weights || {}).reduce((sum, value) => sum + value, 0);
+}
+
+function getDrawnCardsTotalScore() {
+  return state.drawnCards.reduce((sum, card) => sum + getCardIntensityScore(card), 0);
+}
+
+function getMaxCardIntensityScore() {
+  const maxScore = Math.max(...state.cards.map((card) => getCardIntensityScore(card)), 0);
+  return Math.max(maxScore, 1);
+}
+
+function getDrawnCardsTier() {
+  const totalScore = getDrawnCardsTotalScore();
+  const totals = getPossibleDrawTotals();
+
+  if (!totals.length) {
+    return { tier: "mild", label: "轻度综合评语" };
+  }
+
+  const p33 = totals[Math.floor((totals.length - 1) * 0.33)];
+  const p66 = totals[Math.floor((totals.length - 1) * 0.66)];
+
+  if (totalScore >= p66) {
+    return { tier: "severe", label: "重度综合评语" };
+  }
+  if (totalScore >= p33) {
+    return { tier: "medium", label: "中度综合评语" };
+  }
+  return { tier: "mild", label: "轻度综合评语" };
+}
+
+function getPossibleDrawTotals() {
+  const poolIds = Array.from(state.collectedCards || []);
+  const usePool = poolIds.length >= 3;
+  const pool = usePool ? poolIds.map((id) => getCardById(id)).filter(Boolean) : state.cards;
+
+  if (!pool || pool.length < 3) {
+    return [];
+  }
+
+  const totals = [];
+  for (let i = 0; i < pool.length - 2; i += 1) {
+    for (let j = i + 1; j < pool.length - 1; j += 1) {
+      for (let k = j + 1; k < pool.length; k += 1) {
+        totals.push(
+          getCardIntensityScore(pool[i]) +
+          getCardIntensityScore(pool[j]) +
+          getCardIntensityScore(pool[k])
+        );
+      }
+    }
+  }
+
+  totals.sort((a, b) => a - b);
+  return totals;
+}
+
+function getProfileReviewForTier(outcome, tier) {
+  const reviews = outcome?.reviews;
+  if (reviews && reviews[tier]) {
+    return reviews[tier];
+  }
+  return outcome?.description || "暂无综合评语。";
 }
 
 function showResult() {

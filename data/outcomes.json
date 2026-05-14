@@ -4,6 +4,11 @@
     "tier": "extreme",
     "label": "摆烂终身荣誉顾问",
     "description": "放弃已成为肌肉记忆，建议申遗",
+    "reviews": {
+      "mild": "摆烂像你的减压按钮，点一下就能回到省电模式。",
+      "medium": "摆烂进入流程化管理，先拖延再合理化，顺序固定。",
+      "severe": "摆烂成为终身事业，行动被无限期置顶，连内疚都下线。"
+    },
     "main": "lan",
     "conditions": {
       "min": {
@@ -16,6 +21,11 @@
     "tier": "extreme",
     "label": "自嘲黑洞",
     "description": "能把葬礼讲成脱口秀，但自己笑不出来",
+    "reviews": {
+      "mild": "自嘲是你的安全气囊，先笑场就能稳住情绪。",
+      "medium": "自嘲成默认语气，别人还没开口你就先补刀。",
+      "severe": "自嘲像黑洞，情绪全被吸成冷笑，快乐也被吞没。"
+    },
     "main": "zic",
     "conditions": {
       "min": {
@@ -28,6 +38,11 @@
     "tier": "extreme",
     "label": "饼学博士生导师",
     "description": "画的饼能充饥、御寒、当房产证用",
+    "reviews": {
+      "mild": "画饼是你的启动器，先立目标再慢慢找路。",
+      "medium": "饼越画越大，现实还在加载，你的心情已先到终点。",
+      "severe": "饼学登顶，宏图当主食，现实只剩草稿与注释。"
+    },
     "main": "hua",
     "conditions": {
       "min": {
@@ -40,6 +55,11 @@
     "tier": "extreme",
     "label": "消费主义祭司",
     "description": "花钱是信仰，物品是祭品，空虚是神谕",
+    "reviews": {
+      "mild": "消费是你的情绪止痛药，买到就像解决了一半。",
+      "medium": "消费成条件反射，情绪一波动先下单再思考。",
+      "severe": "消费即信仰，清空购物车比清空烦恼更快。"
+    },
     "main": "xia",
     "conditions": {
       "min": {
@@ -52,6 +72,11 @@
     "tier": "extreme",
     "label": "影武者·完全体",
     "description": "七个人格轮班，周日休息，自己数不清",
+    "reviews": {
+      "mild": "你能在不同场景切换人设，依旧游刃有余。",
+      "medium": "人设越来越多，社交像多窗口操作，偶尔会卡顿。",
+      "severe": "人格轮班上岗，真实自己被排到夜班。"
+    },
     "main": "bia",
     "conditions": {
       "min": {
@@ -64,6 +89,11 @@
     "tier": "extreme",
     "label": "重装骑士·无敌版",
     "description": "血厚防高，对痛苦免疫，但可能也免疫快乐",
+    "reviews": {
+      "mild": "钝感像你的保护壳，挫折撞上去只会弹开。",
+      "medium": "钝感升级成盔甲，坏事经过自动滤镜。",
+      "severe": "钝感满级，痛苦和快乐都变成无声字幕。"
+    },
     "main": "dun",
     "conditions": {
       "min": {
@@ -76,6 +106,11 @@
     "tier": "combo",
     "label": "创伤驱动的赛博行为艺术",
     "description": "用放弃表演治愈童年，线上比线下更真实",
+    "reviews": {
+      "mild": "摆烂、自嘲、表演形成轻量三件套，能及时自救。",
+      "medium": "三件套逐渐成固定剧本，情绪波动靠表演收场。",
+      "severe": "用表演掩护摆烂，用自嘲封口，现实像舞台布景。"
+    },
     "combo": ["lan", "zic", "bia"],
     "conditions": {
       "min": {
@@ -90,6 +125,11 @@
     "tier": "combo",
     "label": "仪式性消费型画饼",
     "description": "买装备=做了，拍照片=练了，收藏=学了",
+    "reviews": {
+      "mild": "消费和画饼当燃料，动机还能点火。",
+      "medium": "消费买动力，画饼稳信心，执行总在待机。",
+      "severe": "计划靠饼，行动靠买，现实被你先包装后搁置。"
+    },
     "combo": ["lan", "xia", "hua"],
     "conditions": {
       "min": {
@@ -104,6 +144,11 @@
     "tier": "combo",
     "label": "麻木型人格分裂喜剧人",
     "description": "线上线下判若两人，但两边都在自嘲",
+    "reviews": {
+      "mild": "自嘲配表演再加钝感，场合里显得轻松。",
+      "medium": "外表在演，内心钝感，笑点你自己扛。",
+      "severe": "笑话护身，情绪锁死，真实感被你降噪。"
+    },
     "combo": ["zic", "bia", "dun"],
     "conditions": {
       "min": {
@@ -118,6 +163,11 @@
     "tier": "combo",
     "label": "精致废墟策展人·Pro",
     "description": "废墟里开ins风展览，且收费入场",
+    "reviews": {
+      "mild": "画饼配消费，再加一点表演感，废墟也有灯光。",
+      "medium": "废墟开始有策展逻辑，风格稳定且自成体系。",
+      "severe": "人设与消费共振，现实被你布置成长期展厅。"
+    },
     "combo": ["hua", "xia", "bia"],
     "conditions": {
       "min": {
@@ -132,6 +182,11 @@
     "tier": "combo",
     "label": "放弃得太熟练的喜剧演员",
     "description": "还没摔倒已经在想怎么吐槽自己",
+    "reviews": {
+      "mild": "摆烂、钝感、自嘲是你的缓冲包，能快速回血。",
+      "medium": "失败来了先自嘲后摆烂，心情被你妥善安置。",
+      "severe": "摆烂成自动挡，自嘲成背景音，现实像综艺剪辑。"
+    },
     "combo": ["lan", "dun", "zic"],
     "conditions": {
       "min": {
@@ -146,6 +201,11 @@
     "tier": "core",
     "label": "创伤驱动的行为艺术",
     "description": "用放弃表演治愈童年，观众只有自己。",
+    "reviews": {
+      "mild": "小挫折时会用摆烂式表演自救，还在可控范围。",
+      "medium": "摆烂逐渐成了处理情绪的默认动作，舞台感变强。",
+      "severe": "你用行为艺术包装崩溃，观众只有自己。"
+    },
     "main": "lan",
     "sub": "zic",
     "conditions": {
@@ -160,6 +220,11 @@
     "tier": "core",
     "label": "仪式性消费型摆烂",
     "description": "买装备=做了，拍照片=练了，发朋友圈=成了。",
+    "reviews": {
+      "mild": "先买装备找动力，行动还会跟上。",
+      "medium": "仪式越来越完整，但行动越来越晚。",
+      "severe": "装备满格，行动空仓，仪式替代了执行。"
+    },
     "main": "lan",
     "sub": "xia",
     "conditions": {
@@ -174,6 +239,11 @@
     "tier": "core",
     "label": "线上线下双轨摆烂",
     "description": "线下假装努力，线上真实摆烂，互不干扰。",
+    "reviews": {
+      "mild": "线上吐槽解压，线下还能维持正常节奏。",
+      "medium": "线上摆烂成主频道，现实只剩最低配。",
+      "severe": "双轨完全分离，现实成过场，线上才是真生活。"
+    },
     "main": "lan",
     "sub": "bia",
     "conditions": {
@@ -188,6 +258,11 @@
     "tier": "core",
     "label": "代际传递的拖延",
     "description": "父母的“以后再说”变成了自己的“下次一定”。",
+    "reviews": {
+      "mild": "小事上爱拖，心里还会自责。",
+      "medium": "拖延成习惯，借口越来越顺。",
+      "severe": "“下次一定”成口头禅，时间被无限延后。"
+    },
     "main": "lan",
     "sub": "dun",
     "conditions": {
@@ -202,6 +277,11 @@
     "tier": "core",
     "label": "自我消解型幽默",
     "description": "还没开始就已经想好怎么吐槽自己了。",
+    "reviews": {
+      "mild": "先自嘲化解紧张，气氛还能稳住。",
+      "medium": "自嘲成社交开场白，认真话题被你巧妙绕开。",
+      "severe": "笑话成盔甲，认真成禁区，情绪被你剪辑成段子。"
+    },
     "main": "zic",
     "sub": "lan",
     "conditions": {
@@ -216,6 +296,11 @@
     "tier": "core",
     "label": "痛苦项目管理师",
     "description": "把崩溃做成思维导图，但“下次还敢”。",
+    "reviews": {
+      "mild": "会给焦虑排期，痛苦也讲效率。",
+      "medium": "崩溃变成KPI，情绪也有里程碑。",
+      "severe": "痛苦流程化，连崩溃都有复盘。"
+    },
     "main": "zic",
     "sub": "hua",
     "conditions": {
@@ -230,6 +315,11 @@
     "tier": "core",
     "label": "赛博哭墙建造者",
     "description": "匿名小号里“今天又失败了”，但配图精致。",
+    "reviews": {
+      "mild": "小号记录情绪，算是温柔的自救。",
+      "medium": "情绪输出成日常内容，哭墙越建越精致。",
+      "severe": "你在哭墙上搭了温馨小屋，连崩溃都被装饰。"
+    },
     "main": "zic",
     "sub": "bia",
     "conditions": {
@@ -244,6 +334,11 @@
     "tier": "core",
     "label": "预言型悲观喜剧人",
     "description": "专预言坏事，且预言准确率100%。",
+    "reviews": {
+      "mild": "预设风险以求心安，偶尔还能反转。",
+      "medium": "坏消息来前先讲个段子，心里早已演练过。",
+      "severe": "坏事像剧本，你负责播报并提前谢幕。"
+    },
     "main": "zic",
     "sub": "dun",
     "conditions": {
@@ -258,6 +353,11 @@
     "tier": "core",
     "label": "望梅止渴型画饼师",
     "description": "收藏教程=学了，买装备=练了，立flag=做了。",
+    "reviews": {
+      "mild": "靠收藏教程充电，偶尔还能真学一点。",
+      "medium": "flag越立越高，行动总在准备阶段。",
+      "severe": "饼比现实更好吃，行动只剩嘴上。"
+    },
     "main": "hua",
     "sub": "lan",
     "conditions": {
@@ -272,6 +372,11 @@
     "tier": "core",
     "label": "消费主义赎罪券",
     "description": "知识付费是新时代的赎罪券，买了=学了。",
+    "reviews": {
+      "mild": "买课当补偿，偶尔还能打开进度条。",
+      "medium": "消费代替行动，赎罪券越攒越多。",
+      "severe": "赎罪券攒一桌，行动仍缺席。"
+    },
     "main": "xia",
     "sub": "hua",
     "conditions": {
@@ -286,6 +391,11 @@
     "tier": "core",
     "label": "精致废墟策展人",
     "description": "摆烂也要摆出陈列感，废墟里开ins风展览。",
+    "reviews": {
+      "mild": "摆烂也要好看，生活被你打了柔光。",
+      "medium": "废墟开始有展陈逻辑，风格稳定。",
+      "severe": "你在废墟里当策展总监，日常被美术统筹。"
+    },
     "main": "xia",
     "sub": "bia",
     "conditions": {
@@ -300,6 +410,11 @@
     "tier": "core",
     "label": "对冲型养生朋克",
     "description": "枸杞配炸鸡，体检正常觉得亏，关掉步数=健康。",
+    "reviews": {
+      "mild": "养生和放纵并行，体感还能自洽。",
+      "medium": "对冲成常态，健康感靠抵消维持。",
+      "severe": "健康当副本，放纵当主线，日常像在打补丁。"
+    },
     "main": "xia",
     "sub": "dun",
     "conditions": {
@@ -314,6 +429,11 @@
     "tier": "core",
     "label": "人格分裂表演家",
     "description": "小号比大号更像本人，线上线下判若两人。",
+    "reviews": {
+      "mild": "切换人设以适应场合，还能稳住主线。",
+      "medium": "人设越来越细分，真实感被你分层管理。",
+      "severe": "真实自己失去排班权，人设成常驻运营。"
+    },
     "main": "bia",
     "sub": "zic",
     "conditions": {
@@ -328,6 +448,11 @@
     "tier": "core",
     "label": "社交电量伪装者",
     "description": "社交电量不足但还在硬撑，笑脸是机械表情。",
+    "reviews": {
+      "mild": "电量不够也能撑一会，社交还能续航。",
+      "medium": "笑脸模式耗电严重，恢复需要更久。",
+      "severe": "电量常年红线，表情仍在强撑。"
+    },
     "main": "bia",
     "sub": "dun",
     "conditions": {
@@ -342,6 +467,11 @@
     "tier": "core",
     "label": "麻木型循环玩家",
     "description": "放弃得过于熟练，对失败麻木并继续。",
+    "reviews": {
+      "mild": "失败不会让你停下，情绪还能波动。",
+      "medium": "麻木成习惯，复盘变走过场。",
+      "severe": "循环像自动脚本，情绪被静音。"
+    },
     "main": "dun",
     "sub": "lan",
     "conditions": {

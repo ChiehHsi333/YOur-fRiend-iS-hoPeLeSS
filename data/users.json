@@ -556,6 +556,364 @@
             "bia": 4,
             "dun": 4
           }
+        },
+        {
+          "friendId": "64be6edfa9fc",
+          "timestamp": 1778925227938,
+          "answerMap": {
+            "1": {
+              "optionId": "B",
+              "weights": {
+                "lan": 2,
+                "zic": 0,
+                "hua": 0,
+                "xia": 1,
+                "bia": 0,
+                "dun": 2
+              }
+            },
+            "2": {
+              "optionId": "D",
+              "weights": {
+                "lan": 2,
+                "zic": 0,
+                "hua": 0,
+                "xia": 2,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "3": {
+              "optionId": "C",
+              "weights": {
+                "lan": 2,
+                "zic": 1,
+                "hua": 1,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "4": {
+              "optionId": "B",
+              "weights": {
+                "lan": 2,
+                "zic": 1,
+                "hua": 1,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "5": {
+              "optionId": "D",
+              "weights": {
+                "lan": 1,
+                "zic": 0,
+                "hua": 0,
+                "xia": 3,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "6": {
+              "optionId": "A",
+              "weights": {
+                "lan": 0,
+                "zic": 0,
+                "hua": 0,
+                "xia": 2,
+                "bia": 2,
+                "dun": 0
+              }
+            },
+            "7": {
+              "optionId": "D",
+              "weights": {
+                "lan": 1,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 0,
+                "dun": 2
+              }
+            },
+            "8": {
+              "optionId": "A",
+              "weights": {
+                "lan": 0,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 3,
+                "dun": 0
+              }
+            },
+            "9": {
+              "optionId": "D",
+              "weights": {
+                "lan": 0,
+                "zic": 0,
+                "hua": 2,
+                "xia": 0,
+                "bia": 2,
+                "dun": 0
+              }
+            },
+            "10": {
+              "optionId": "B",
+              "weights": {
+                "lan": 0,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 1,
+                "dun": 2
+              }
+            },
+            "11": {
+              "optionId": "D",
+              "weights": {
+                "lan": 1,
+                "zic": 0,
+                "hua": 2,
+                "xia": 2,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "12": {
+              "optionId": "A",
+              "weights": {
+                "lan": 2,
+                "zic": 0,
+                "hua": 1,
+                "xia": 0,
+                "bia": 0,
+                "dun": 1
+              }
+            },
+            "13": {
+              "optionId": "D",
+              "weights": {
+                "lan": 1,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 0,
+                "dun": 2
+              }
+            },
+            "14": {
+              "optionId": "C",
+              "weights": {
+                "lan": 2,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "15": {
+              "optionId": "D",
+              "weights": {
+                "lan": 1,
+                "zic": 1,
+                "hua": 2,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            }
+          },
+          "scores": {
+            "lan": 17,
+            "zic": 8,
+            "hua": 9,
+            "xia": 10,
+            "bia": 8,
+            "dun": 9
+          }
+        },
+        {
+          "friendId": "cd44f39095f5",
+          "timestamp": 1778925240454,
+          "answerMap": {
+            "1": {
+              "optionId": "A",
+              "weights": {
+                "lan": 1,
+                "zic": 2,
+                "hua": 0,
+                "xia": 0,
+                "bia": 2,
+                "dun": 0
+              }
+            },
+            "2": {
+              "optionId": "B",
+              "weights": {
+                "lan": 0,
+                "zic": 1,
+                "hua": 0,
+                "xia": 1,
+                "bia": 2,
+                "dun": 0
+              }
+            },
+            "3": {
+              "optionId": "C",
+              "weights": {
+                "lan": 2,
+                "zic": 1,
+                "hua": 1,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "4": {
+              "optionId": "C",
+              "weights": {
+                "lan": 0,
+                "zic": 2,
+                "hua": 0,
+                "xia": 0,
+                "bia": 0,
+                "dun": 1
+              }
+            },
+            "5": {
+              "optionId": "C",
+              "weights": {
+                "lan": 0,
+                "zic": 0,
+                "hua": 1,
+                "xia": 2,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "6": {
+              "optionId": "C",
+              "weights": {
+                "lan": 0,
+                "zic": 0,
+                "hua": 0,
+                "xia": 0,
+                "bia": 3,
+                "dun": 0
+              }
+            },
+            "7": {
+              "optionId": "A",
+              "weights": {
+                "lan": 2,
+                "zic": 0,
+                "hua": 0,
+                "xia": 0,
+                "bia": 2,
+                "dun": 1
+              }
+            },
+            "8": {
+              "optionId": "C",
+              "weights": {
+                "lan": 1,
+                "zic": 1,
+                "hua": 2,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "9": {
+              "optionId": "D",
+              "weights": {
+                "lan": 0,
+                "zic": 0,
+                "hua": 2,
+                "xia": 0,
+                "bia": 2,
+                "dun": 0
+              }
+            },
+            "10": {
+              "optionId": "B",
+              "weights": {
+                "lan": 0,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 1,
+                "dun": 2
+              }
+            },
+            "11": {
+              "optionId": "C",
+              "weights": {
+                "lan": 1,
+                "zic": 1,
+                "hua": 0,
+                "xia": 2,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "12": {
+              "optionId": "C",
+              "weights": {
+                "lan": 1,
+                "zic": 1,
+                "hua": 0,
+                "xia": 3,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "13": {
+              "optionId": "C",
+              "weights": {
+                "lan": 0,
+                "zic": 1,
+                "hua": 0,
+                "xia": 2,
+                "bia": 0,
+                "dun": 1
+              }
+            },
+            "14": {
+              "optionId": "C",
+              "weights": {
+                "lan": 2,
+                "zic": 1,
+                "hua": 0,
+                "xia": 0,
+                "bia": 0,
+                "dun": 0
+              }
+            },
+            "15": {
+              "optionId": "C",
+              "weights": {
+                "lan": 0,
+                "zic": 1,
+                "hua": 0,
+                "xia": 2,
+                "bia": 0,
+                "dun": 0
+              }
+            }
+          },
+          "scores": {
+            "lan": 10,
+            "zic": 13,
+            "hua": 6,
+            "xia": 12,
+            "bia": 12,
+            "dun": 5
+          }
         }
       ]
     },
@@ -747,6 +1105,11 @@
     "f94693319260": {
       "nickname": "MKH",
       "createdAt": 1778921813616,
+      "friendResponses": []
+    },
+    "0062ef197716": {
+      "nickname": "check",
+      "createdAt": 1778923891896,
       "friendResponses": []
     }
   }

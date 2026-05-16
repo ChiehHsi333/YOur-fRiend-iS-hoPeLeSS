@@ -365,13 +365,48 @@ async function loadInviteUrl() {
   }
 }
 
-function copyInviteUrl() {
+async function copyToClipboard(text) {
+  if (!text) return false;
+  // 优先使用现代 Clipboard API
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      // 降级
+    }
+  }
+  // 降级方案：临时 textarea + execCommand
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.left = "-9999px";
+  ta.style.top = "0";
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  let ok = false;
+  try {
+    ok = document.execCommand("copy");
+  } catch {
+    ok = false;
+  }
+  document.body.removeChild(ta);
+  return ok;
+}
+
+async function copyInviteUrl() {
   const url = ui.inviteUrlInput?.value;
-  if (!url) return;
-  navigator.clipboard?.writeText(url).then(
-    () => showToast("邀请链接已复制"),
-    () => showToast("复制失败，请手动复制", true)
-  );
+  if (!url) {
+    showToast("邀请链接未生成，请刷新页面", true);
+    return;
+  }
+  const ok = await copyToClipboard(url);
+  if (ok) {
+    showToast("邀请链接已复制");
+  } else {
+    showToast("复制失败，请手动长按链接复制", true);
+  }
 }
 
 function bindEvents() {
@@ -410,19 +445,30 @@ function bindEvents() {
 
   // 邀请相关
   ui.copyInviteBtn?.addEventListener("click", copyInviteUrl);
-  ui.ownerInviteBtn?.addEventListener("click", () => {
-    copyInviteUrl();
-    showToast("邀请链接已复制，快去分享给好友吧！");
+  ui.ownerInviteBtn?.addEventListener("click", async () => {
+    const url = ui.inviteUrlInput?.value;
+    if (!url) {
+      showToast("邀请链接未生成，请刷新页面", true);
+      return;
+    }
+    const ok = await copyToClipboard(url);
+    if (ok) {
+      showToast("邀请链接已复制，快去分享给好友吧！");
+    } else {
+      showToast("复制失败，请手动长按链接复制", true);
+    }
   });
 
   // 注册成功面板
-  ui.copyRegUserIdBtn?.addEventListener("click", () => {
+  ui.copyRegUserIdBtn?.addEventListener("click", async () => {
     const id = ui.regUserId?.value;
     if (!id) return;
-    navigator.clipboard?.writeText(id).then(
-      () => showToast("用户ID已复制"),
-      () => showToast("复制失败，请手动复制", true)
-    );
+    const ok = await copyToClipboard(id);
+    if (ok) {
+      showToast("用户ID已复制");
+    } else {
+      showToast("复制失败，请手动长按复制", true);
+    }
   });
   ui.goHomeBtn?.addEventListener("click", enterHomeFromRegister);
 }
@@ -532,6 +578,8 @@ function startQuiz() {
   state.hasDrawn = false;
   renderQuestion();
   showScreen("quiz");
+  // 滚动到题目区域
+  ui.quiz?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function goPrev() {
@@ -1323,15 +1371,15 @@ function buildShareText(outcome, comment, scores) {
   return `我的结果是「${outcome.label}」。${outcome.description}｜${comment.text}｜${scoreLine}`;
 }
 
-function copyShareText() {
+async function copyShareText() {
   const text = ui.shareText.value;
-  if (!text) {
-    return;
+  if (!text) return;
+  const ok = await copyToClipboard(text);
+  if (ok) {
+    showToast("文案已复制");
+  } else {
+    showToast("复制失败，请手动复制", true);
   }
-  navigator.clipboard?.writeText(text).then(
-    () => showToast("文案已复制"),
-    () => showToast("复制失败，请手动复制", true)
-  );
 }
 
 async function downloadResultCard() {
